@@ -3,8 +3,11 @@ from django.conf import settings
 from django.utils import timezone
 from .models import DocumentType, Document, DocumentAssignment, PersonalDocument
 from apps.users.serializers import UserSummarySerializer
+from django.contrib.auth import get_user_model
+from apps.users.models import Role
 
-User = settings.AUTH_USER_MODEL
+User = get_user_model()
+
 
 class DocumentTypeSerializer(serializers.ModelSerializer):
     class Meta:
@@ -75,10 +78,9 @@ class DocumentCreateSerializer(serializers.ModelSerializer):
         many=True, write_only=True, required=False
     )
     assignee_role_ids = serializers.PrimaryKeyRelatedField(
-        queryset='users.Role'.objects.all(),
-        many=True, write_only=True, required=False
-    )
-
+    queryset=Role.objects.all(),
+    many=True, write_only=True, required=False
+)
     class Meta:
         model = Document
         fields = [
