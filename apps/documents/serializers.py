@@ -3,10 +3,10 @@ from django.conf import settings
 from django.utils import timezone
 from .models import DocumentType, Document, DocumentAssignment, PersonalDocument
 from apps.users.serializers import UserSummarySerializer
-from django.contrib.auth import get_user_model
-from apps.users.models import Role
 
-User = get_user_model()
+from django.contrib.auth import get_user_model
+
+User = get_user_model()              # теперь это класс, у которого есть objects
 
 
 class DocumentTypeSerializer(serializers.ModelSerializer):
@@ -78,9 +78,10 @@ class DocumentCreateSerializer(serializers.ModelSerializer):
         many=True, write_only=True, required=False
     )
     assignee_role_ids = serializers.PrimaryKeyRelatedField(
-    queryset=Role.objects.all(),
-    many=True, write_only=True, required=False
-)
+        queryset='users.Role'.objects.all(),
+        many=True, write_only=True, required=False
+    )
+
     class Meta:
         model = Document
         fields = [
@@ -194,5 +195,3 @@ class PersonalDocumentSerializer(serializers.ModelSerializer):
         validated_data.pop('user', None) # User cannot be changed on update via this serializer
         validated_data['uploaded_by'] = request.user # Log who last updated/uploaded file
         return super().update(instance, validated_data)
-
-
