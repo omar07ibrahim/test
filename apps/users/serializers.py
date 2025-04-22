@@ -3,6 +3,7 @@ from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth import get_user_model
 from django.db import transaction
 from .models import Role
+from django.utils.translation import gettext_lazy as _
 
 User = get_user_model()
 
