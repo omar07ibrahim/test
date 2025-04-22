@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 from .models import LeaveType, LeaveRecord
+from django.utils.translation import gettext_lazy as _
 
 @admin.register(LeaveType)
 class LeaveTypeAdmin(admin.ModelAdmin):
