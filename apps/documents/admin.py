@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 from .models import DocumentType, Document, DocumentAssignment, PersonalDocument
+from django.utils.translation import gettext_lazy as _
 
 @admin.register(DocumentType)
 class DocumentTypeAdmin(admin.ModelAdmin):
