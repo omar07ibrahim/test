@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import AuditLog
+from django.utils.translation import gettext_lazy as _
 
 @admin.register(AuditLog)
 class AuditLogAdmin(admin.ModelAdmin):
