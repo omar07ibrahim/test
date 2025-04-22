@@ -17,8 +17,9 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 #    используете psycopg2‑binary.
 # --------------------------------------------
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends netcat gcc libpq-dev \
+    && apt-get install -y --no-install-recommends netcat-openbsd gcc libpq-dev \
     && rm -rf /var/lib/apt/lists/*
+
 
 # --------------------------------------------
 # 3. Установка python‑зависимостей
